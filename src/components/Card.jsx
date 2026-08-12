@@ -18,12 +18,13 @@ export default function Card({ imgId, onClick }) {
   useEffect(() => {
     setTimeout(() => {
       setImg({ title: `${imgId} loaded` });
+      console.log(imgId + "loaded");
     }, 1000);
   }, [imgId]);
 
   return (
     <div className="card" onClick={onClick(imgId)}>
-      <img src={img.url} alt={img.title} />
+      {/* <img src={img.url} alt={img.title} /> */}
       <h2>{img.title ?? "Loading..."}</h2>
     </div>
   );

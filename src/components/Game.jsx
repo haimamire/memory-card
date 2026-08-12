@@ -1,5 +1,6 @@
 import { useState } from "react";
 import originalImgIds from "../data/images";
+import { randomizeArr } from "../utils/randomize";
 import Card from "./Card";
 
 function Scoreboard({ score, bestScore }) {
@@ -19,6 +20,8 @@ export default function Game() {
   const [guessedIds, setGuessedIds] = useState([]);
 
   const handleClick = (currentImgId) => () => {
+    setImgIds(randomizeArr(imgIds));
+
     // Game over
     if (guessedIds.includes(currentImgId)) {
       setScore(0);
@@ -29,6 +32,7 @@ export default function Game() {
       setScore(newScore);
       setBestScore(newScore);
       setGuessedIds([...guessedIds, currentImgId]);
+
       // Winning
       if (newScore === originalImgIds.length) {
         alert("u won");
