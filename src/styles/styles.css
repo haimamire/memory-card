@@ -7,3 +7,8 @@
 body {
   font-family: var(--system-ui);
 }
+
+.card {
+  background-color: rgb(219, 217, 217);
+  border-radius: 10px;
+}
