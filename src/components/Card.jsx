@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 export default function Card({ imgId, onClick }) {
   const [img, setImg] = useState({});
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   // useEffect(() => {
   //   fetch(
@@ -16,11 +17,17 @@ export default function Card({ imgId, onClick }) {
   //     .catch((error) => console.log(error));
   // }, [imgId]);
   useEffect(() => {
-    setTimeout(() => {
-      setImg({ title: `${imgId} loaded` });
-      console.log(imgId + "loaded");
-    }, 1000);
-  }, [imgId]);
+    if (imgLoaded) return;
+
+    setTimeout(
+      () => {
+        setImgLoaded(true);
+        setImg({ title: `${imgId} loaded` });
+        console.log(imgId + "loaded");
+      },
+      Math.floor(Math.random() * 2000),
+    );
+  }, [imgId, imgLoaded]);
 
   return (
     <div className="card" onClick={onClick(imgId)}>

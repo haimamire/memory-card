@@ -14,7 +14,7 @@ function Scoreboard({ score, bestScore }) {
 }
 
 export default function Game() {
-  const [imgIds, setImgIds] = useState(originalImgIds);
+  const [imgIds, setImgIds] = useState(randomizeArr(originalImgIds));
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [guessedIds, setGuessedIds] = useState([]);
