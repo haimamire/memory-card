@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import hero from "../assets/hero.png";
 
 export default function Card({ imgId, onClick }) {
   const [img, setImg] = useState({});
@@ -22,7 +23,7 @@ export default function Card({ imgId, onClick }) {
     setTimeout(
       () => {
         setImgLoaded(true);
-        setImg({ title: `${imgId} loaded` });
+        setImg({ url: hero, title: `${imgId} loaded` });
         console.log(imgId + "loaded");
       },
       Math.floor(Math.random() * 2000),
@@ -31,7 +32,7 @@ export default function Card({ imgId, onClick }) {
 
   return (
     <div className="card" onClick={onClick(imgId)}>
-      {/* <img src={img.url} alt={img.title} /> */}
+      <img src={img.url} alt={img.title} draggable={false} />
       <h2>{img.title ?? "Loading..."}</h2>
     </div>
   );

@@ -4,11 +4,28 @@
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
-body {
+#root {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   font-family: var(--system-ui);
+  padding: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
 }
 
 .card {
+  padding: 20px;
   background-color: rgb(219, 217, 217);
   border-radius: 10px;
+  user-select: none;
+}
+
+.card img {
+  object-fit: cover;
+  border: none;
 }
