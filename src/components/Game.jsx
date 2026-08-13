@@ -1,6 +1,8 @@
 import { useState } from "react";
-import originalImgIds from "../data/images";
+import Swal from "sweetalert2";
+
 import { randomizeArr } from "../utils/randomize";
+import imagesData from "../data/images";
 import Card from "./Card";
 
 function Scoreboard({ score, bestScore }) {
@@ -14,19 +16,21 @@ function Scoreboard({ score, bestScore }) {
 }
 
 export default function Game() {
-  const [imgIds, setImgIds] = useState(randomizeArr(originalImgIds));
+  const [images, setImages] = useState(randomizeArr(imagesData));
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [guessedIds, setGuessedIds] = useState([]);
 
   const handleClick = (currentImgId) => () => {
-    setImgIds(randomizeArr(imgIds));
+    setImages(randomizeArr(images));
 
     // Game over
     if (guessedIds.includes(currentImgId)) {
       setScore(0);
       setGuessedIds([]);
-      alert("u lost");
+      Swal.fire({
+        title: "You lost...",
+      });
     } else {
       const newScore = score + 1;
       setScore(newScore);
@@ -34,8 +38,12 @@ export default function Game() {
       setGuessedIds([...guessedIds, currentImgId]);
 
       // Winning
-      if (newScore === originalImgIds.length) {
-        alert("u won");
+      if (newScore === imagesData.length) {
+        setScore(0);
+        setGuessedIds([]);
+        Swal.fire({
+          title: "You won!",
+        });
       }
     }
   };
@@ -44,10 +52,11 @@ export default function Game() {
     <>
       <Scoreboard score={score} bestScore={bestScore} />
       <div className="cards">
-        {imgIds.map((id) => (
+        {images.map((id) => (
           <Card key={id} imgId={id} onClick={handleClick} />
         ))}
       </div>
+      <dialog>aa</dialog>
     </>
   );
 }
