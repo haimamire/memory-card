@@ -28,19 +28,22 @@ export default function Game() {
     if (guessedIds.includes(currentImgId)) {
       setScore(0);
       setGuessedIds([]);
+
       Swal.fire({
         title: "You lost...",
       });
     } else {
       const newScore = score + 1;
       setScore(newScore);
-      setBestScore(newScore);
       setGuessedIds([...guessedIds, currentImgId]);
+
+      if (newScore > bestScore) setBestScore(newScore);
 
       // Winning
       if (newScore === imagesData.length) {
         setScore(0);
         setGuessedIds([]);
+
         Swal.fire({
           title: "You won!",
         });
@@ -56,7 +59,6 @@ export default function Game() {
           <Card key={id} imgId={id} onClick={handleClick} />
         ))}
       </div>
-      <dialog>aa</dialog>
     </>
   );
 }
