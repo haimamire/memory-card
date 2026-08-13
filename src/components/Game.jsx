@@ -10,7 +10,9 @@ function Scoreboard({ score, bestScore }) {
     <div className="scoreboard">
       <h2>Scoreboard</h2>
       <p>Score: {score}</p>
-      <p>Best score: {bestScore}</p>
+      <p>
+        <b>Best score: {bestScore}</b>
+      </p>
     </div>
   );
 }
