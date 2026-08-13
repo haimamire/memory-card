@@ -1,37 +1,26 @@
 import { useState, useEffect } from "react";
-import hero from "../assets/hero.png";
 
-export default function Card({ imgId, onClick }) {
+export default function Card({ name, onClick }) {
   const [img, setImg] = useState({});
   const [imgLoaded, setImgLoaded] = useState(false);
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://api.giphy.com/v1/gifs/${imgId}?api_key=pnOiqSYN364PaAhhf34RpaEjgX20Ypl9`,
-  //   )
-  //     .then((response) => response.json())
-  //     .then((json) => {
-  //       const title = json.data.title;
-  //       const url = json.data.images.original.url;
-  //       setImg({ url: url, title: title });
-  //     })
-  //     .catch((error) => console.log(error));
-  // }, [imgId]);
   useEffect(() => {
     if (imgLoaded) return;
 
-    setTimeout(
-      () => {
+    fetch(`https://kitsu.io/api/edge/characters?filter[name]=${name}`)
+      .then((response) => response.json())
+      .then((json) => {
+        const title = json.data[0].attributes.names.en;
+        const url = json.data[0].attributes.image.original;
+
+        setImg({ url: url, title: title });
         setImgLoaded(true);
-        setImg({ url: hero, title: `${imgId} loaded` });
-        console.log(imgId + "loaded");
-      },
-      Math.floor(Math.random() * 2000),
-    );
-  }, [imgId, imgLoaded]);
+      })
+      .catch((error) => console.log(error));
+  }, [imgLoaded, name]);
 
   return (
-    <div className="card" onClick={onClick(imgId)}>
+    <div className="card" onClick={onClick(name)}>
       <img src={img.url} alt={img.title} draggable={false} />
       <h2>{img.title ?? "Loading..."}</h2>
     </div>

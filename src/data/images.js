@@ -1,16 +1,16 @@
-const imagesIds = [
-  "1",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "11",
-  "12",
+const names = [
+  "askeladd",
+  "yotsugi-ononoki",
+  "johan-liebert",
+  "edward-elric",
+  "shinobu-oshino",
+  "thorfinn",
+  "kurisu-makise",
+  "araragi-koyomi",
+  "kazuma-satou",
+  "kenzou-tenma",
+  "roy-mustang",
+  "kiriyama-rei",
 ];
 
-export default imagesIds;
+export default names;

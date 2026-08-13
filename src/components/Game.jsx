@@ -21,15 +21,15 @@ export default function Game() {
   const [images, setImages] = useState(randomizeArr(imagesData));
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
-  const [guessedIds, setGuessedIds] = useState([]);
+  const [guessedNames, setGuessedNames] = useState([]);
 
-  const handleClick = (currentImgId) => () => {
+  const handleClick = (currentImgName) => () => {
     setImages(randomizeArr(images));
 
     // Game over
-    if (guessedIds.includes(currentImgId)) {
+    if (guessedNames.includes(currentImgName)) {
       setScore(0);
-      setGuessedIds([]);
+      setGuessedNames([]);
 
       Swal.fire({
         title: "You lost...",
@@ -37,14 +37,14 @@ export default function Game() {
     } else {
       const newScore = score + 1;
       setScore(newScore);
-      setGuessedIds([...guessedIds, currentImgId]);
+      setGuessedNames([...guessedNames, currentImgName]);
 
       if (newScore > bestScore) setBestScore(newScore);
 
       // Winning
-      if (newScore === imagesData.length) {
+      if (newScore === images.length) {
         setScore(0);
-        setGuessedIds([]);
+        setGuessedNames([]);
 
         Swal.fire({
           title: "You won!",
@@ -57,8 +57,8 @@ export default function Game() {
     <>
       <Scoreboard score={score} bestScore={bestScore} />
       <div className="cards">
-        {images.map((id) => (
-          <Card key={id} imgId={id} onClick={handleClick} />
+        {images.map((name) => (
+          <Card key={name} name={name} onClick={handleClick} />
         ))}
       </div>
     </>
